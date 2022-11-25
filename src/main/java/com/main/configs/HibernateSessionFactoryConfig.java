@@ -1,5 +1,8 @@
 package com.main.configs;
 
+import com.main.entity.Category;
+import com.main.entity.Movies;
+import com.main.entity.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -28,10 +31,9 @@ public class HibernateSessionFactoryConfig {
                 Configuration configuration = new Configuration();
                 configuration.setProperties(settings);
 
-//                configuration.addAnnotatedClass(User.class);
-//                configuration.addAnnotatedClass(Category.class);
-//                configuration.addAnnotatedClass(Product.class);
-//                configuration.addAnnotatedClass(Customer.class);
+                configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Category.class);
+                configuration.addAnnotatedClass(Movies.class);
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
