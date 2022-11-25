@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
 
+@Entity
+@Table(name = "movies")
 public class Movies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
