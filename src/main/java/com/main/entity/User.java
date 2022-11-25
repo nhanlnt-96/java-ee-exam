@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(name="User.HQL.findByEmail", query = "SELECT u FROM User u where u.email = :email"),
+        @NamedQuery(name="User.HQL.getUserById", query = "SELECT u FROM User u where u.userId = :userId"),
+        @NamedQuery(name="User.HQL.findByEmailAndNotUserId", query = "SELECT u FROM User u where u.email = :email and u.userId != :userId"),
+        @NamedQuery(name="User.HQL.checkLogin", query = "SELECT u FROM User u where u.email = :email and u.password = :password")
+})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +24,12 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
+    public User(String email, String fullName, String password) {
+        this.email = email;
+        this.fullName = fullName;
+        this.password = password;
+    }
 
     public User() {
     }

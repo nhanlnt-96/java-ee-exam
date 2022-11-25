@@ -1,18 +1,42 @@
 <%@ include file="../shared/head.jsp" %>
 <head>
-    <title>Movies Manage | Login</title>
+    <title>Movies Manage | Add new User</title>
 </head>
 <body>
+<c:if test="${message != null}">
+    <input id="notification" type="hidden" value="${message}">
+</c:if>
+
 <div style="width: 100vw; height: 100vh">
     <%@ include file="header.jsp" %>
     <div class="container d-flex justify-content-center align-items-center" style="height: calc(100vh - 56px);">
         <div style="max-width: 680px; width: 100%">
-            <h2 class="text-center mb-2">Please login</h2>
-            <form id="adminLoginForm" action="login">
+            <c:choose>
+                <c:when test="${theUser != null && not empty theUser.userId}">
+                    <c:url var="actionLink" value="manage_user">
+                        <c:param name="command" value="UPDATE"/>
+                    </c:url>
+                    <h2 class="text-center mb-4">Update user</h2>
+                </c:when>
+
+                <c:otherwise>
+                    <c:url var="actionLink" value="add-new-user">
+                        <c:param name="command" value="INSERT"/>
+                    </c:url>
+                    <h2 class="text-center mb-4">Create new user</h2>
+                </c:otherwise>
+            </c:choose>
+            <form id="addNewUserForm" action="${actionLink}" method="post">
                 <div class="mb-3">
                     <label for="emailInput" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="emailInput"/>
+                    <input type="email" class="form-control" name="email" id="emailInput" value="${theUser.email}"/>
                     <div class="invalid-feedback">Please input valid email address</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="userFullNameInput">Full name</label>
+                    <input name="fullName" type="text" class="form-control" id="userFullNameInput"
+                           placeholder="Full name" value="${theUser.fullName}">
+                    <div class="invalid-feedback">Please input user full name</div>
                 </div>
                 <div class="mb-3">
                     <label for="passwordInput" class="form-label">Password</label>
@@ -39,10 +63,11 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#adminLoginForm").validate({
+        $("#addNewUserForm").validate({
             rules: {
                 email: {required: true, email: true},
-                password: {required: true},
+                fullName: {required: true, minlength: 2},
+                password: {required: true, minLength: 6},
             },
             /* add bootstrap class is-valid & is-invalid */
             highlight: function (element, errorClass, validClass) {
