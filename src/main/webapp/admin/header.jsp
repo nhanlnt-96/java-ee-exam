@@ -12,13 +12,13 @@
                     <a class="nav-link active" aria-current="page" href="<c:url value="/admin" />">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Create category</a>
+                    <a class="nav-link active" href="#">Category Manage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="<c:url value="/admin/add-new-user" />">Create user</a>
+                    <a class="nav-link active" href="<c:url value="/admin/manage-user" />">User Manage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active">Upload new movie</a>
+                    <a class="nav-link active">Movie Manage</a>
                 </li>
             </ul>
             <div class="d-flex justify-content-center align-items-center">

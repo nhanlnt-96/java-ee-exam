@@ -5,6 +5,11 @@
          version="5.0">
     <display-name>movies</display-name>
 
+    <context-param>
+        <param-name>baseURL</param-name>
+        <param-value>http://localhost:8080/movie_war</param-value>
+    </context-param>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
