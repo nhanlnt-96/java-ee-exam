@@ -12,7 +12,7 @@
                     <a class="nav-link active" aria-current="page" href="<c:url value="/admin" />">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Category Manage</a>
+                    <a class="nav-link active" href="<c:url value="/admin/manage-category" />">Category Manage</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="<c:url value="/admin/manage-user" />">User Manage</a>

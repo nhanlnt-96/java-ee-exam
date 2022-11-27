@@ -5,6 +5,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categories")
+@NamedQueries({
+        @NamedQuery(name="Category.HQL.getByName",
+                query = "SELECT c FROM Category c where c.name = :name"),
+        @NamedQuery(name="Category.HQL.getByNameAndNotCategoryId",
+                query = "SELECT c FROM Category c where c.name = :name and c.categoryId != :categoryId")
+})
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +22,20 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private Set<Movies> movies;
+
+    public Category() {
+    }
+
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+
+    public Category(Integer categoryId, String name) {
+        this.categoryId = categoryId;
+        this.name = name;
+    }
 
     public Integer getCategoryId() {
         return categoryId;
