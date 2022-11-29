@@ -1,6 +1,6 @@
 <%@ include file="../shared/head.jsp" %>
 <head>
-    <title>Movies Manage | Add new User</title>
+    <title>Admin Page | Manage User</title>
 </head>
 <body>
 <c:if test="${message != null}">
@@ -9,7 +9,7 @@
 
 <div style="width: 100vw; height: 100vh">
     <%@ include file="header.jsp" %>
-    <div class="container d-flex justify-content-center align-items-center  py-5" style="height: calc(100vh - 56px);">
+    <div class="container d-flex justify-content-center align-items-center  py-5" style="min-height: calc(100vh - 56px);">
         <div style="max-width: 680px; width: 100%">
             <c:choose>
                 <c:when test="${theUser != null && not empty theUser.userId}">

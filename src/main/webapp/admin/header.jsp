@@ -18,7 +18,7 @@
                     <a class="nav-link active" href="<c:url value="/admin/manage-user" />">User Manage</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active">Movie Manage</a>
+                    <a class="nav-link active" href="<c:url value="/admin/manage-movies" />">Movie Manage</a>
                 </li>
             </ul>
             <div class="d-flex justify-content-center align-items-center">

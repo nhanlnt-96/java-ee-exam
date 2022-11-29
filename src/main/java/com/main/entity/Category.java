@@ -5,12 +5,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "categories")
-@NamedQueries({
-        @NamedQuery(name="Category.HQL.getByName",
-                query = "SELECT c FROM Category c where c.name = :name"),
-        @NamedQuery(name="Category.HQL.getByNameAndNotCategoryId",
-                query = "SELECT c FROM Category c where c.name = :name and c.categoryId != :categoryId")
-})
+@NamedQueries({@NamedQuery(name = "Category.HQL.getByName", query = "SELECT c FROM Category c where c.name = :name"), @NamedQuery(name = "Category.HQL.getByNameAndNotCategoryId", query = "SELECT c FROM Category c where c.name = :name and c.categoryId != :categoryId")})
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,16 +48,34 @@ public class Category {
         this.name = name;
     }
 
-    public Set<Movies> getMovies() {
-        return movies;
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((categoryId == null) ? 0 : categoryId.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
     }
 
-    public void setMovies(Set<Movies> movies) {
-        this.movies = movies;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        Category other = (Category) obj;
+        if (categoryId == null) {
+            if (other.categoryId != null) return false;
+        } else if (!categoryId.equals(other.categoryId)) return false;
+        if (name == null) {
+            if (other.name != null) return false;
+        } else if (!name.equals(other.name)) return false;
+        return true;
     }
+
 
     @Override
     public String toString() {
-        return "Category{" + "categoryId=" + categoryId + ", name='" + name + '\'' + ", movies=" + movies + '}';
+        return "Category [categoryId=" + categoryId + ", name=" + name + "]";
     }
 }

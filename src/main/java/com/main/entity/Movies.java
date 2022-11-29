@@ -6,6 +6,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "movies")
+@NamedQueries({
+        @NamedQuery(name = "Movies.HQL.getByName",
+                query = "SELECT m FROM Movies m where m.name = :name"),
+        @NamedQuery(name = "Movies.HQL.getByNameAndNotMoviesId",
+                query = "SELECT m FROM Movies m where m.name = :name and m.movieId != :movieId")
+})
 public class Movies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

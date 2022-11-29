@@ -1,11 +1,11 @@
 <%@ include file="../shared/head.jsp" %>
 <head>
-    <title>Movies Manage | Login</title>
+    <title>Admin Page | Login</title>
 </head>
 <body>
 <div style="width: 100vw; height: 100vh">
     <%@ include file="header.jsp" %>
-    <div class="container d-flex justify-content-center align-items-center" style="height: calc(100vh - 56px);">
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
         <div style="max-width: 680px; width: 100%">
             <h2 class="text-center mb-2">Please login</h2>
             <form id="adminLoginForm" action="login">

@@ -39,3 +39,6 @@ build/
 
 ### Intelliji ###
 .idea
+
+### .env ###
+src/main/webapp/env.json

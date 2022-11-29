@@ -1,6 +1,6 @@
 <%@ include file="../shared/head.jsp" %>
 <head>
-    <title>Movies Manage | Category Manage</title>
+    <title>Admin Page | Category Manage</title>
 </head>
 <body>
 <%@ include file="header.jsp" %>
