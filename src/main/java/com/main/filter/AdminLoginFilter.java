@@ -40,7 +40,7 @@ public class AdminLoginFilter implements Filter {
         if (isLoggedIn || isLoginRequest || isLoginPage) {
             chain.doFilter(request, response);
         } else {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/admin-login");
             dispatcher.forward(httpRequest, response);
         }
     }
