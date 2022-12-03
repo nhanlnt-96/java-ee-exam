@@ -60,7 +60,7 @@ public class MoviesDAO extends JpaDAO<Movies> {
     public Movies getByNameAndNotMoviesId(Movies movies) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", movies.getName());
-        params.put("moviesId", movies.getMovieId());
+        params.put("movieId", movies.getMovieId());
 
         List<Movies> moviesList = super.getNamedEqueryWithParams("Movies.HQL.getByNameAndNotMoviesId", params);
 
@@ -72,7 +72,7 @@ public class MoviesDAO extends JpaDAO<Movies> {
         return null;
     }
 
-    public List<Movies> getMoviessByName(String name) {
+    public List<Movies> getMoviesByName(String name) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("name", name);
 

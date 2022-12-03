@@ -50,6 +50,6 @@ public class MovieService {
 
 
     public List<Movies> searchMoviesByName(String name) {
-        return moviesDAO.getMoviessByName(name);
+        return moviesDAO.getMoviesByName(name);
     }
 }

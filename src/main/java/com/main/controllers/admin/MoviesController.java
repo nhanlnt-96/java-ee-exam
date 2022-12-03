@@ -102,7 +102,6 @@ public class MoviesController extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         Integer theMovieId = Integer.valueOf(request.getParameter("movieId"));
-
         Movies movieToUpdate = movieService.getById(theMovieId);
         session.setAttribute("theMovie", movieToUpdate);
 
@@ -114,13 +113,6 @@ public class MoviesController extends HttpServlet {
 
     private void insert(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Movies newMovie = new Movies();
-
-        System.out.println("category: " + request.getParameter("category"));
-        System.out.println("name: " + request.getParameter("name"));
-        System.out.println("director: " + request.getParameter("director"));
-        System.out.println("movieLink: " + request.getParameter("movieLink"));
-        System.out.println("description: " + request.getParameter("description"));
-
         Integer categoryId = Integer.parseInt(request.getParameter("category"));
         Category category = categoryService.getById(categoryId);
 
@@ -129,6 +121,7 @@ public class MoviesController extends HttpServlet {
         newMovie.setDescription(request.getParameter("description"));
         newMovie.setCategory(category);
         newMovie.setMovieLink(request.getParameter("movieLink"));
+        newMovie.setImage(request.getParameter("imageLink"));
 
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -138,21 +131,6 @@ public class MoviesController extends HttpServlet {
             e.printStackTrace();
             throw new ServletException("The format date is yyyy-MM-dd");
         }
-
-        Part filePart = request.getPart("image");
-
-        if (filePart != null & filePart.getSize() > 0) {
-            long size = filePart.getSize();
-            byte[] imageBytes = new byte[(int) size];
-
-            InputStream inputStream = filePart.getInputStream();
-            inputStream.read(imageBytes);
-            inputStream.close();
-
-            newMovie.setImage(imageBytes);
-        }
-
-        System.out.println("new movie" + newMovie);
 
         String errorMessage = this.movieService.create(newMovie);
         if (errorMessage != null) {
@@ -168,20 +146,38 @@ public class MoviesController extends HttpServlet {
 
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//		Integer movieId = Integer.valueOf(request.getParameter("movieId"));
-//		String name = request.getParameter("name");
-//
-//		Movie productToUpdate = new Movie(movieId, name);
-//		String errorMessage = productService.update(productToUpdate);
-//
-//		if (errorMessage != null) {
-//			request.setAttribute("message", errorMessage);
-//			RequestDispatcher rd = request.getRequestDispatcher("product-form.jsp");
-//			rd.forward(request, response);
-//			return;
-//		}
-//
-//		response.sendRedirect("manage_product?command=LIST");
+        Integer movieId = Integer.valueOf(request.getParameter("movieId"));
+        Integer categoryId = Integer.parseInt(request.getParameter("category"));
+        Movies movieToUpdate = new Movies();
+        Category category = categoryService.getById(categoryId);
+
+        movieToUpdate.setMovieId(movieId);
+        movieToUpdate.setName(request.getParameter("name"));
+        movieToUpdate.setDirector(request.getParameter("director"));
+        movieToUpdate.setDescription(request.getParameter("description"));
+        movieToUpdate.setCategory(category);
+        movieToUpdate.setMovieLink(request.getParameter("movieLink"));
+        movieToUpdate.setImage(request.getParameter("imageLink"));
+
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date publishDate = dateFormat.parse(request.getParameter("publishDate"));
+            movieToUpdate.setPublishDate(publishDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new ServletException("The format date is yyyy-MM-dd");
+        }
+
+        String errorMessage = movieService.update(movieToUpdate);
+
+        if (errorMessage != null) {
+            request.setAttribute("message", errorMessage);
+            RequestDispatcher rd = request.getRequestDispatcher("movies-form.jsp");
+            rd.forward(request, response);
+            return;
+        }
+
+        response.sendRedirect("manage-movies?command=LIST");
     }
 
 
@@ -189,6 +185,6 @@ public class MoviesController extends HttpServlet {
         Integer movieId = Integer.valueOf(request.getParameter("movieId"));
         movieService.delete(movieId);
 
-        response.sendRedirect("manage_product?command=LIST");
+        response.sendRedirect("manage-movies?command=LIST");
     }
 }

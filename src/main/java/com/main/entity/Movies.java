@@ -2,16 +2,12 @@ package com.main.entity;
 
 import javax.persistence.*;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 
 @Entity
 @Table(name = "movies")
-@NamedQueries({
-        @NamedQuery(name = "Movies.HQL.getByName",
-                query = "SELECT m FROM Movies m where m.name = :name"),
-        @NamedQuery(name = "Movies.HQL.getByNameAndNotMoviesId",
-                query = "SELECT m FROM Movies m where m.name = :name and m.movieId != :movieId")
-})
+@NamedQueries({@NamedQuery(name = "Movies.HQL.getByName", query = "SELECT m FROM Movies m where m.name = :name"), @NamedQuery(name = "Movies.HQL.getByNameAndNotMoviesId", query = "SELECT m FROM Movies m where m.name = :name and m.movieId != :movieId")})
 public class Movies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +27,7 @@ public class Movies {
     private Date publishDate;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "movie_link")
     private String movieLink;
@@ -80,11 +76,11 @@ public class Movies {
         this.publishDate = publishDate;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -106,6 +102,6 @@ public class Movies {
 
     @Override
     public String toString() {
-        return "Movies{" + "movieId=" + movieId + ", name='" + name + '\'' + ", director='" + director + '\'' + ", description='" + description + '\'' + ", publishDate=" + publishDate + ", image=" + Arrays.toString(image) + ", movieLink='" + movieLink + '\'' + ", category=" + category + '}';
+        return "Movies{" + "movieId=" + movieId + ", name='" + name + '\'' + ", director='" + director + '\'' + ", description='" + description + '\'' + ", publishDate=" + publishDate + ", image=" + image + ", movieLink='" + movieLink + '\'' + ", category=" + category + '}';
     }
 }

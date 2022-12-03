@@ -13,29 +13,38 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">User Id</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Email</th>
+                <th scope="col">Movie Id</th>
+                <th scope="col">Movie's Name</th>
+                <th scope="col">Movie's Category</th>
+                <th scope="col">Movie's Poster</th>
+                <th scope="col">Movie's Director</th>
+                <th scope="col">Movie's Description</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="user" items="${userList}">
+            <c:forEach var="movie" items="${moviesList}">
                 <c:url var="updateLink" value="manage-movies">
                     <c:param name="command" value="LOAD"/>
-                    <c:param name="userId" value="${user.userId}"/>
+                    <c:param name="movieId" value="${movie.movieId}"/>
                 </c:url>
 
                 <tr>
-                    <td class="align-middle">${user.userId }</td>
-                    <td class="align-middle">${user.fullName }</td>
-                    <td class="align-middle">${user.email }</td>
-                    <td class="align-middle" style="width: 200px">
+                    <td class="align-middle p-2">${movie.movieId}</td>
+                    <td class="align-middle p-2">${movie.name}</td>
+                    <td class="align-middle p-2">${movie.category.name}</td>
+                    <td class="align-middle p-2">
+                        <img src="${movie.image}" alt="${movie.name}"
+                             style="width: 130px; height: 180px; object-fit: contain;">
+                    </td>
+                    <td class="align-middle p-2">${movie.director}</td>
+                    <td class="align-middle p-2" style="width: 350px; text-align: justify">${movie.description}</td>
+                    <td class="align-middle p-2" style="width: 200px">
                         <a href="${updateLink}" class="btn btn-primary">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </a>
                         <span class="mx-3"> | </span>
-                        <a href="javascript:if(confirm('Are you sure?')){window.location.href='manage-movies?command=DELETE&userId=${user.userId}'}"
+                        <a href="javascript:if(confirm('Are you sure?')){window.location.href='manage-movies?command=DELETE&movieId=${movie.movieId}'}"
                            class="btn btn-danger">
                             <i class="fa-solid fa-trash-can"></i>
                         </a>
