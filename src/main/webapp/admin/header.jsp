@@ -22,9 +22,18 @@
                 </li>
             </ul>
             <div class="d-flex justify-content-center align-items-center">
-                <p class="mb-0">Welcome, <c:out value="${sessionScope.userEmail}"/></p>
-                <span class="mx-3">|</span>
-                <button class="btn btn-outline-secondary">Logout</button>
+                <c:if test="${sessionScope.userEmail != null}">
+                    <p class="mb-0">Welcome, <c:out value="${sessionScope.userEmail}"/></p>
+                    <span class="mx-3">|</span>
+                    <a href="<c:url value="/admin/admin-login"/>" class="btn btn-outline-secondary">Logout</a>
+                </c:if>
+
+                <c:if test="${sessionScope.userEmail == null}">
+                    <div class="d-flex justify-content-end vw-50">
+                        <a href="<c:url value="/admin/admin-login" />" type="button"
+                           class="btn btn-outline-secondary ms-4">Login</a>
+                    </div>
+                </c:if>
             </div>
         </div>
         <%--        </c:if>--%>

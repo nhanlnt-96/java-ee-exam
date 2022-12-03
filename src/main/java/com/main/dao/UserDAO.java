@@ -1,6 +1,7 @@
 package com.main.dao;
 
 import com.main.entity.User;
+import com.main.utils.BCrypt;
 
 import java.util.HashMap;
 import java.util.List;
@@ -88,10 +89,9 @@ public class UserDAO extends JpaDAO<User> {
     public boolean checkLogin(String email, String password) {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("email", email);
-        params.put("password", password);
 
         List<User> userList = super.getNamedEqueryWithParams("User.HQL.checkLogin", params);
 
-        return userList != null && userList.size() == 1;
+        return userList != null && BCrypt.verifyPassword(password, userList.get(0).getPassword());
     }
 }

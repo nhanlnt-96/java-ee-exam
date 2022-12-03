@@ -3,12 +3,15 @@
     <title>Admin Page | Login</title>
 </head>
 <body>
+<c:if test="${message != null }">
+    <input id="notification" type="hidden" value="${message }">
+</c:if>
+
 <div style="width: 100vw; height: 100vh">
-    <%@ include file="header.jsp" %>
     <div class="container d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 56px);">
         <div style="max-width: 680px; width: 100%">
             <h2 class="text-center mb-2">Please login</h2>
-            <form id="adminLoginForm" action="login">
+            <form id="adminLoginForm" action="admin-login" method="post">
                 <div class="mb-3">
                     <label for="emailInput" class="form-label">Email address</label>
                     <input type="email" class="form-control" name="email" id="emailInput"/>
